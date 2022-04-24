@@ -16,6 +16,8 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController textController = TextEditingController();
   TextEditingController textController2 = TextEditingController();
 
+  get child => null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Foodies",
+                  "Roy App",
                   style: TextStyle(
                       color: primary,
                       fontSize: 40,
@@ -209,9 +211,15 @@ class _LoginPageState extends State<LoginPage> {
                   "Does not have an account yet?",
                   style: TextStyle(decoration: TextDecoration.underline),
                 ),
-                Text(
-                  " Create One",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    primary: primary,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        "/register_page", (route) => false);
+                  },
+                  child: Text('cerate one'),
                 )
               ],
             )

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:foodie_ui_kit/data/category_json.dart';
-import 'package:foodie_ui_kit/data/store_json.dart';
 import 'package:foodie_ui_kit/pages/store_detail_page.dart';
 import 'package:foodie_ui_kit/services/get_main_data.dart';
 import 'package:foodie_ui_kit/services/get_promotion_data.dart';
