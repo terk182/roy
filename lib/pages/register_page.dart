@@ -20,7 +20,13 @@ class _RegisterPageState extends State<RegisterPage> {
 }
 
 Widget getBody() {
-  var textController;
+  final GlobalKey<FormState> _formKey = GlobalKey();
+
+  String firstName = "";
+  String lastName = "";
+  String phone = "";
+  String password = "";
+  String password_confirm = "";
   return Padding(
     padding: const EdgeInsets.all(mainPadding),
     child: Form(
@@ -40,123 +46,170 @@ Widget getBody() {
           SizedBox(
             height: 40,
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Phone Number",
-                style: TextStyle(
-                    fontSize: 16, color: grey, fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                width: double.infinity,
-                height: 45,
-                decoration: BoxDecoration(
-                    color: textFieldBg, borderRadius: BorderRadius.circular(5)),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  child: TextField(
-                    cursorColor: textBlack,
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "Enter Phone Number"),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Password",
-                style: TextStyle(
-                    fontSize: 16, color: grey, fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                width: double.infinity,
-                height: 45,
-                decoration: BoxDecoration(
-                    color: textFieldBg, borderRadius: BorderRadius.circular(5)),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  child: Row(
-                    children: [
-                      Flexible(
-                        child: TextField(
-                          obscureText: true,
-                          cursorColor: textBlack,
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "Enter Password"),
+          Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextFormField(
+                    keyboardType: TextInputType.text,
+                    decoration: const InputDecoration(
+                        labelText: 'First Name',
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 0.0),
                         ),
-                      ),
-                      Icon(
-                        Icons.remove_red_eye,
-                        size: 18,
-                      )
-                    ],
+                        border: OutlineInputBorder()),
+                    onFieldSubmitted: (value) {
+                      firstName = value;
+                    },
+                    onChanged: (value) {
+                      firstName = value;
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty || value.length < 3) {
+                        return 'First Name must contain at least 3 characters';
+                      } else if (value.contains(RegExp(r'^[0-9_\-=@,\.;]+$'))) {
+                        return 'First Name cannot contain special characters';
+                      }
+                    },
                   ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Password",
-                style: TextStyle(
-                    fontSize: 16, color: grey, fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                width: double.infinity,
-                height: 45,
-                decoration: BoxDecoration(
-                    color: textFieldBg, borderRadius: BorderRadius.circular(5)),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  child: Row(
-                    children: [
-                      Flexible(
-                        child: TextField(
-                          obscureText: true,
-                          cursorColor: textBlack,
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "Enter Password"),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.text,
+                    decoration: const InputDecoration(
+                        labelText: 'Last Name',
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 0.0),
                         ),
-                      ),
-                      Icon(
-                        Icons.remove_red_eye,
-                        size: 18,
-                      )
-                    ],
+                        border: OutlineInputBorder()),
+                    validator: (value) {
+                      if (value == null || value.isEmpty || value.length < 3) {
+                        return 'Last Name must contain at least 3 characters';
+                      } else if (value.contains(RegExp(r'^[0-9_\-=@,\.;]+$'))) {
+                        return 'Last Name cannot contain special characters';
+                      }
+                    },
+                    onFieldSubmitted: (value) {
+                      lastName = value;
+                    },
+                    onChanged: (value) {
+                      lastName = value;
+                    },
                   ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 40,
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.phone,
+                    decoration: const InputDecoration(
+                        labelText: 'Phone Number',
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 0.0),
+                        ),
+                        border: OutlineInputBorder()),
+                    validator: (value) {
+                      if (value == null || value.isEmpty || value.length < 10) {
+                        return 'Last Name must contain at least 3 characters';
+                      } else if (value.contains(RegExp(r'^[0-9_\-=@,\.;]+$'))) {
+                        return 'Last Name cannot contain special characters';
+                      }
+                    },
+                    onFieldSubmitted: (value) {
+                      phone = value;
+                    },
+                    onChanged: (value) {
+                      phone = value;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                        labelText: 'Password',
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 0.0),
+                        ),
+                        border: OutlineInputBorder()),
+                    validator: (value) {
+                      if (value == null || value.isEmpty || value.length < 8) {
+                        return 'Last Name must contain at least 3 characters';
+                      } else if (value.contains(RegExp(r'^[0-9_\-=@,\.;]+$'))) {
+                        return 'Last Name cannot contain special characters';
+                      }
+                    },
+                    onFieldSubmitted: (value) {
+                      password = value;
+                    },
+                    onChanged: (value) {
+                      password = value;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                        labelText: 'confirm Password',
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 0.0),
+                        ),
+                        border: OutlineInputBorder()),
+                    validator: (value) {
+                      if (value == null || value.isEmpty || value.length < 8) {
+                        return 'Last Name must contain at least 3 characters';
+                      } else if (value.contains(RegExp(r'^[0-9_\-=@,\.;]+$'))) {
+                        return 'Last Name cannot contain special characters';
+                      }
+                    },
+                    onFieldSubmitted: (value) {
+                      password_confirm = value;
+                    },
+                    onChanged: (value) {
+                      password_confirm = value;
+                    },
+                  ),
+                ],
+              )),
+          const SizedBox(
+            height: 20,
           ),
           InkWell(
             onTap: () async {
+              print(firstName);
+              print(lastName);
+              print(phone);
+              print(password);
+              print(password_confirm);
+              var context;
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: Text('รหัสผ่านไม่ถูกต้อง'),
+                      actions: <Widget>[
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text('Close')),
+                      ],
+                    );
+                  });
               // Navigator.of(context)
               //     .pushNamedAndRemoveUntil("/root_app", (route) => false);
 
@@ -171,7 +224,7 @@ Widget getBody() {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Login",
+                    "submit",
                     style: TextStyle(
                         fontSize: 16,
                         color: textWhite,
@@ -180,7 +233,7 @@ Widget getBody() {
                   SizedBox(
                     width: 12,
                   ),
-                  getSvgIcon("arrow_forward_icon.svg")
+                  // getSvgIcon("arrow_forward_icon.svg")
                 ],
               ),
             ),
@@ -188,21 +241,6 @@ Widget getBody() {
           SizedBox(
             height: 40,
           ),
-          Row(
-            children: [
-              Text(
-                "Does not have an account yet?",
-                style: TextStyle(decoration: TextDecoration.underline),
-              ),
-              TextButton(
-                style: TextButton.styleFrom(
-                  primary: primary,
-                ),
-                onPressed: () {},
-                child: Text('cerate one'),
-              )
-            ],
-          )
         ],
       ),
     ),
