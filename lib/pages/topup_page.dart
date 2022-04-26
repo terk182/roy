@@ -12,7 +12,7 @@ class TopupPage extends StatefulWidget {
 
 class _TopupPageState extends State<TopupPage> {
 
-
+TextEditingController topupValue = TextEditingController();
   get child => null;
 
   @override
@@ -68,7 +68,7 @@ class _TopupPageState extends State<TopupPage> {
                       children: [
                         Flexible(
                           child: TextField(
-                            
+                            controller: topupValue,
                             cursorColor: textBlack,
                             decoration: InputDecoration(
                                 border: InputBorder.none,
@@ -88,9 +88,9 @@ class _TopupPageState extends State<TopupPage> {
             ),
             InkWell(
               onTap: ()  {
-                // Navigator.of(context)
-                //     .pushNamedAndRemoveUntil("/root_app", (route) => false
-                // ignore: unused_local_variable
+               //arguments
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil("/qr_generate", (route) => false,arguments:topupValue.text);
               },
               child: Container(
                 width: 141,

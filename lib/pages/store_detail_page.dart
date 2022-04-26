@@ -1,9 +1,6 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:foodie_ui_kit/data/product_json.dart';
-import 'package:foodie_ui_kit/pages/qr_generate.dart';
 import 'package:foodie_ui_kit/services/get_promotion_list.dart';
 import 'package:foodie_ui_kit/theme/colors.dart';
 import 'package:foodie_ui_kit/theme/padding.dart';
@@ -12,11 +9,13 @@ class StoreDetailPage extends StatefulWidget {
   final String image;
   final String name;
   final String uid;
+  final String customeruid;
   const StoreDetailPage({
     Key? key,
     required this.image,
     required this.name,
     required this.uid,
+    required this.customeruid,
   }) : super(key: key);
 
   @override
@@ -24,6 +23,8 @@ class StoreDetailPage extends StatefulWidget {
 }
 
 class _StoreDetailPageState extends State<StoreDetailPage> {
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

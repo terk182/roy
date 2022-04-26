@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodie_ui_kit/data/variables.dart';
 import 'package:foodie_ui_kit/models/login.dart';
 import 'package:foodie_ui_kit/services/check_login.dart';
 import 'package:foodie_ui_kit/theme/colors.dart';
@@ -154,6 +155,11 @@ class _LoginPageState extends State<LoginPage> {
 
                   // ignore: unnecessary_null_comparison
                   if (user.uid != null) {
+                    setState(() {
+                      customerName = user.username;
+                      customerUid = user.uid;
+                      print(customerName);
+                    });
                     Navigator.of(context)
                         .pushNamedAndRemoveUntil("/root_app", (route) => false);
                   } else {

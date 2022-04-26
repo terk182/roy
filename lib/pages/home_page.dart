@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodie_ui_kit/data/category_json.dart';
+import 'package:foodie_ui_kit/data/variables.dart';
 import 'package:foodie_ui_kit/pages/store_detail_page.dart';
 import 'package:foodie_ui_kit/services/get_main_data.dart';
 import 'package:foodie_ui_kit/services/get_promotion_data.dart';
@@ -19,9 +20,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  
   @override
   void initState() {
-    print("test----->");
+   print(customerName);
+
     super.initState();
   }
 
@@ -134,6 +137,7 @@ class _HomePageState extends State<HomePage> {
                                                           .shop[index].name,
                                                       uid: result
                                                           .shop[index].tags,
+                                                      customeruid:customerUid,
                                                     )));
                                       },
                                       child: Container(
@@ -165,7 +169,7 @@ class _HomePageState extends State<HomePage> {
                                                     name:
                                                         result.shop[index].name,
                                                     uid:
-                                                        result.shop[index].tags,
+                                                        result.shop[index].tags, customeruid: customerUid,
                                                   )));
                                     },
                                     child: Container(
@@ -278,7 +282,7 @@ class _HomePageState extends State<HomePage> {
                                                     name: result
                                                         .promotion[index].name,
                                                     uid:
-                                                        result.shop[index].tags,
+                                                        result.shop[index].tags, customeruid: customerUid,
                                                   )));
                                     },
                                     child: Container(
@@ -336,7 +340,7 @@ class _HomePageState extends State<HomePage> {
                                                     name: result2
                                                         .shop[index].name,
                                                     uid: result2
-                                                        .shop[index].tags,
+                                                        .shop[index].tags, customeruid: customerUid,
                                                   )));
                                     },
                                     child: Container(
