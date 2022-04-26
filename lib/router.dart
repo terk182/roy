@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:foodie_ui_kit/pages/login_page.dart';
+import 'package:foodie_ui_kit/pages/qr_generate.dart';
 import 'package:foodie_ui_kit/pages/register_page.dart';
 import 'package:foodie_ui_kit/pages/root_app.dart';
 
@@ -10,6 +12,10 @@ Route<dynamic> generateRoute(RouteSettings setting) {
       return MaterialPageRoute(builder: (context) => RootApp());
     case '/register_page':
       return MaterialPageRoute(builder: (context) => RegisterPage());
+    case '/login_page':
+      return MaterialPageRoute(builder: (context) => LoginPage());
+    case '/qr_generate':
+      return MaterialPageRoute(builder: (context) => GeneratePage());
     default:
       return MaterialPageRoute(
           builder: (context) => Scaffold(

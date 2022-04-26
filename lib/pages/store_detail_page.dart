@@ -3,16 +3,20 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:foodie_ui_kit/data/product_json.dart';
+import 'package:foodie_ui_kit/pages/qr_generate.dart';
+import 'package:foodie_ui_kit/services/get_promotion_list.dart';
 import 'package:foodie_ui_kit/theme/colors.dart';
 import 'package:foodie_ui_kit/theme/padding.dart';
 
 class StoreDetailPage extends StatefulWidget {
   final String image;
   final String name;
+  final String uid;
   const StoreDetailPage({
     Key? key,
     required this.image,
     required this.name,
+    required this.uid,
   }) : super(key: key);
 
   @override
@@ -124,12 +128,63 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
 
   Widget getBody() {
     var size = MediaQuery.of(context).size;
+    var list;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(mainPadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                TextButton(
+                    style: ButtonStyle(
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.black45),
+                      overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                        (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.hovered))
+                            return Colors.blue.withOpacity(0.04);
+                          if (states.contains(MaterialState.focused) ||
+                              states.contains(MaterialState.pressed))
+                            return Colors.blue.withOpacity(0.12);
+                          return null; // Defer to the widget's default.
+                        },
+                      ),
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.black12),
+                    ),
+                    onPressed: () {},
+                    child: Text('wallet')),
+                SizedBox(
+                  width: 10,
+                ),
+                TextButton(
+                    style: ButtonStyle(
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.black45),
+                      overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                        (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.hovered))
+                            return Colors.blue.withOpacity(0.04);
+                          if (states.contains(MaterialState.focused) ||
+                              states.contains(MaterialState.pressed))
+                            return Colors.blue.withOpacity(0.12);
+                          return null; // Defer to the widget's default.
+                        },
+                      ),
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.black12),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/qr_generate');
+                    },
+                    child: Text('Topup'))
+              ],
+            ),
             SizedBox(
               height: 10,
             ),
@@ -153,77 +208,101 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
             SizedBox(
               height: 40,
             ),
-            Column(
-              children: List.generate(productItems.length, (index) {
-                return Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: (size.width * 0.75) - 40,
-                            height: 80,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  productItems[index]['name'],
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Row(
+            FutureBuilder(
+                future: Getpromotionlist().uid(widget.uid),
+                builder:
+                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    var result = snapshot.data;
+
+                    if (result != null) {
+                      list = result.promotion;
+                      return Column(
+                        children: List.generate(list.length, (index) {
+                          return Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 20),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      productItems[index]['price'],
-                                      style: TextStyle(
-                                          color: textBlack, fontSize: 16),
+                                    Container(
+                                      width: (size.width * 0.75) - 40,
+                                      height: 80,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            list[index].promotionName,
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                list[index].discount,
+                                                style: TextStyle(
+                                                    color: textBlack,
+                                                    fontSize: 16),
+                                              ),
+                                              SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                list[index].discounType,
+                                                style: TextStyle(
+                                                    decoration: TextDecoration
+                                                        .lineThrough,
+                                                    color: textBlack,
+                                                    fontSize: 16),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
                                     ),
                                     SizedBox(
-                                      width: 8,
+                                      width: 15,
                                     ),
-                                    Text(
-                                      productItems[index]['discount'],
-                                      style: TextStyle(
-                                          decoration:
-                                              TextDecoration.lineThrough,
-                                          color: textBlack,
-                                          fontSize: 16),
+                                    Container(
+                                      width: 80,
+                                      height: 80,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          image: DecorationImage(
+                                              image: NetworkImage(
+                                                  list[index].imgPath),
+                                              fit: BoxFit.cover)),
                                     )
                                   ],
-                                )
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Container(
-                            width: 80,
-                            height: 80,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        productItems[index]['image']),
-                                    fit: BoxFit.cover)),
-                          )
-                        ],
-                      ),
-                    ),
-                    Divider(
-                      thickness: 0.8,
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                  ],
-                );
-              }),
-            )
+                                ),
+                              ),
+                              Divider(
+                                thickness: 0.8,
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                            ],
+                          );
+                        }),
+                      );
+                    }
+                  } else {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [Text("no data")],
+                    );
+                  }
+
+                  return Text("no data");
+                }),
           ],
         ),
       ),

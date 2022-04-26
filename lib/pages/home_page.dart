@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget getBody() {
     var size = MediaQuery.of(context).size;
+
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -131,6 +132,8 @@ class _HomePageState extends State<HomePage> {
                                                           .shop[index].image,
                                                       name: result
                                                           .shop[index].name,
+                                                      uid: result
+                                                          .shop[index].tags,
                                                     )));
                                       },
                                       child: Container(
@@ -161,6 +164,8 @@ class _HomePageState extends State<HomePage> {
                                                         .shop[index].image,
                                                     name:
                                                         result.shop[index].name,
+                                                    uid:
+                                                        result.shop[index].tags,
                                                   )));
                                     },
                                     child: Container(
@@ -217,7 +222,7 @@ class _HomePageState extends State<HomePage> {
                         if (promotionsnapshot.connectionState ==
                             ConnectionState.done) {
                           var result = promotionsnapshot.data;
-                          print(result.promotion);
+
                           return SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
@@ -230,18 +235,20 @@ class _HomePageState extends State<HomePage> {
                                         right: rightMainPadding),
                                     child: GestureDetector(
                                       onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    StoreDetailPage(
-                                                      image: result
-                                                          .promotion[index]
-                                                          .image,
-                                                      name: result
-                                                          .promotion[index]
-                                                          .name,
-                                                    )));
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) =>
+                                        //             StoreDetailPage(
+                                        //               image: result
+                                        //                   .promotion[index]
+                                        //                   .image,
+                                        //               name: result
+                                        //                   .promotion[index]
+                                        //                   .name,
+                                        //               uid: result
+                                        //                   .shop[index].tags,
+                                        //             )));
                                       },
                                       child: Container(
                                         child: DishCard2(
@@ -270,6 +277,8 @@ class _HomePageState extends State<HomePage> {
                                                         .promotion[index].image,
                                                     name: result
                                                         .promotion[index].name,
+                                                    uid:
+                                                        result.shop[index].tags,
                                                   )));
                                     },
                                     child: Container(
@@ -326,6 +335,8 @@ class _HomePageState extends State<HomePage> {
                                                         .shop[index].image,
                                                     name: result2
                                                         .shop[index].name,
+                                                    uid: result2
+                                                        .shop[index].tags,
                                                   )));
                                     },
                                     child: Container(
