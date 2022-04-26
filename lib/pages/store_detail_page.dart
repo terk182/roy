@@ -180,7 +180,7 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
                           MaterialStateProperty.all<Color>(Colors.black12),
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, '/qr_generate');
+                      Navigator.pushNamed(context, '/topup_page');
                     },
                     child: Text('Topup'))
               ],
