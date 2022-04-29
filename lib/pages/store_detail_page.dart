@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:foodie_ui_kit/data/variables.dart';
 import 'package:foodie_ui_kit/services/get_promotion_list.dart';
 import 'package:foodie_ui_kit/theme/colors.dart';
 import 'package:foodie_ui_kit/theme/padding.dart';
@@ -10,12 +10,14 @@ class StoreDetailPage extends StatefulWidget {
   final String name;
   final String uid;
   final String customeruid;
+  final String owphone;
   const StoreDetailPage({
     Key? key,
     required this.image,
     required this.name,
     required this.uid,
     required this.customeruid,
+    required this.owphone,
   }) : super(key: key);
 
   @override
@@ -23,8 +25,6 @@ class StoreDetailPage extends StatefulWidget {
 }
 
 class _StoreDetailPageState extends State<StoreDetailPage> {
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -181,7 +181,8 @@ class _StoreDetailPageState extends State<StoreDetailPage> {
                           MaterialStateProperty.all<Color>(Colors.black12),
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, '/topup_page');
+                      ownerphone = widget.owphone;
+                      Navigator.popAndPushNamed(context, '/topup_page');
                     },
                     child: Text('Topup'))
               ],

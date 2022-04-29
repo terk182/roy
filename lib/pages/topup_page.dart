@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:foodie_ui_kit/data/variables.dart';
 import 'package:foodie_ui_kit/theme/colors.dart';
 import 'package:foodie_ui_kit/theme/helper.dart';
 import 'package:foodie_ui_kit/theme/padding.dart';
@@ -11,14 +13,34 @@ class TopupPage extends StatefulWidget {
 }
 
 class _TopupPageState extends State<TopupPage> {
-
-TextEditingController topupValue = TextEditingController();
+  TextEditingController topupValue = TextEditingController();
   get child => null;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar:
+          PreferredSize(child: getAppBar(), preferredSize: Size.fromHeight(60)),
       body: getBody(),
+    );
+  }
+
+  Widget getAppBar() {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: SvgPicture.asset(
+            "assets/icons/arrow_back_icon.svg",
+            color: textWhite,
+          )),
+      actions: [IconButton(onPressed: () {}, icon: Icon(Icons.info))],
+      backgroundColor: primary,
+      flexibleSpace: Stack(
+        children: [],
+      ),
     );
   }
 
@@ -44,7 +66,6 @@ TextEditingController topupValue = TextEditingController();
             SizedBox(
               height: 40,
             ),
-            
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -73,10 +94,8 @@ TextEditingController topupValue = TextEditingController();
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "จำนวนเงิน"),
-                        
                           ),
                         ),
-                      
                       ],
                     ),
                   ),
@@ -87,10 +106,15 @@ TextEditingController topupValue = TextEditingController();
               height: 40,
             ),
             InkWell(
-              onTap: ()  {
-               //arguments
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil("/qr_generate", (route) => false,arguments:topupValue.text);
+              onTap: () {
+                //arguments
+                print("******");
+                print(topupValue.text);
+                amount = double.parse(topupValue.text);
+                print("******");
+                Navigator.of(context).pushNamed(
+                  "/qr_generate",
+                );
               },
               child: Container(
                 width: 141,
@@ -110,7 +134,7 @@ TextEditingController topupValue = TextEditingController();
                     SizedBox(
                       width: 12,
                     ),
-                   // getSvgIcon("arrow_forward_icon.svg")
+                    // getSvgIcon("arrow_forward_icon.svg")
                   ],
                 ),
               ),
@@ -118,7 +142,6 @@ TextEditingController topupValue = TextEditingController();
             SizedBox(
               height: 40,
             ),
-           
           ],
         ),
       ),

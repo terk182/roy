@@ -36,6 +36,7 @@ class Shop {
     required this.tags,
     required this.deliveryTime,
     required this.storeType,
+    required this.onwerPhone,
   });
 
   String name;
@@ -44,6 +45,7 @@ class Shop {
   String tags;
   String deliveryTime;
   String storeType;
+  String onwerPhone;
 
   factory Shop.fromJson(Map<String, dynamic> json) => Shop(
         name: json["name"],
@@ -52,6 +54,7 @@ class Shop {
         tags: json["tags"],
         deliveryTime: json["delivery_time"],
         storeType: json["store_type"],
+        onwerPhone: json["onwer_phone"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -61,5 +64,6 @@ class Shop {
         "tags": tags,
         "delivery_time": deliveryTime,
         "store_type": storeType,
+        "onwer_phone": onwerPhone,
       };
 }

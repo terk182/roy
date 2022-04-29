@@ -156,6 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                   // ignore: unnecessary_null_comparison
                   if (user.uid != null) {
                     setState(() {
+                      customerPhone = textController.text;
                       customerName = user.username;
                       customerUid = user.uid;
                       print(customerName);

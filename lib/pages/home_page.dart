@@ -20,11 +20,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  
   @override
   void initState() {
-   print(customerName);
-
+    print(customerName);
     super.initState();
   }
 
@@ -137,7 +135,10 @@ class _HomePageState extends State<HomePage> {
                                                           .shop[index].name,
                                                       uid: result
                                                           .shop[index].tags,
-                                                      customeruid:customerUid,
+                                                      customeruid: customerUid,
+                                                      owphone: result
+                                                          .shop[index]
+                                                          .onwerPhone,
                                                     )));
                                       },
                                       child: Container(
@@ -169,7 +170,10 @@ class _HomePageState extends State<HomePage> {
                                                     name:
                                                         result.shop[index].name,
                                                     uid:
-                                                        result.shop[index].tags, customeruid: customerUid,
+                                                        result.shop[index].tags,
+                                                    customeruid: customerUid,
+                                                    owphone: result
+                                                        .shop[index].onwerPhone,
                                                   )));
                                     },
                                     child: Container(
@@ -282,7 +286,10 @@ class _HomePageState extends State<HomePage> {
                                                     name: result
                                                         .promotion[index].name,
                                                     uid:
-                                                        result.shop[index].tags, customeruid: customerUid,
+                                                        result.shop[index].tags,
+                                                    customeruid: customerUid,
+                                                    owphone: result
+                                                        .shop[index].onwerPhone,
                                                   )));
                                     },
                                     child: Container(
@@ -340,7 +347,10 @@ class _HomePageState extends State<HomePage> {
                                                     name: result2
                                                         .shop[index].name,
                                                     uid: result2
-                                                        .shop[index].tags, customeruid: customerUid,
+                                                        .shop[index].tags,
+                                                    customeruid: customerUid,
+                                                    owphone: result2
+                                                        .shop[index].onwerPhone,
                                                   )));
                                     },
                                     child: Container(
